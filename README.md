@@ -2,6 +2,8 @@
 
 Single-page React app demonstrating optimistic UI, retry logic, and duplicate prevention against a flaky mock API.
 
+View Live: https://dvr76.github.io/eventually-consistent-form/
+
 ## Run
 
 ```bash
