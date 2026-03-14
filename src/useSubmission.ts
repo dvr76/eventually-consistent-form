@@ -39,7 +39,7 @@ export function useSubmission() {
     let attempt = 1;
     while (attempt <= MAX_RETRIES) {
       try {
-        await mockApi(email, amount);
+        await mockApi();
         updateStatus(id, "success", attempt);
         inflightEmails.current.delete(email);
         return; // done

@@ -2,10 +2,7 @@ function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export async function mockApi(
-  email: string,
-  amount: number,
-): Promise<{ ok: boolean }> {
+export async function mockApi(): Promise<{ ok: boolean }> {
   const randomValue = Math.random();
 
   if (randomValue < 0.33) {
