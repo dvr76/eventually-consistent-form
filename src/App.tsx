@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useSubmission } from "./useSubmission";
 import { StatusBadge } from "./StatusBadge";
+import type { SubmitEvent } from "react";
 
 export default function App() {
   const [email, setEmail] = useState("");
   const [amount, setAmount] = useState("");
   const { submissions, submit } = useSubmission();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email || !amount) return;
     submit(email, parseFloat(amount));
@@ -22,10 +23,9 @@ export default function App() {
           Eventually Consistent Form
         </h1>
 
-        {/* ---- Form ---- */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-lg shadow p-6 space-y-4"
+          className="bg-white rounded-md shadow p-6 space-y-4"
         >
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -36,7 +36,7 @@ export default function App() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-sm px-3 py-2 text-sm"
               placeholder="user@example.com"
             />
           </div>
@@ -51,13 +51,13 @@ export default function App() {
               step="0.01"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded-sm px-3 py-2 text-sm"
               placeholder="100.00"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white rounded-md px-4 py-2 text-sm font-medium hover:bg-blue-700 transition-colors"
+            className="cursor-pointer w-full bg-[#017B6D] text-white rounded-sm px-4 py-2 text-sm font-medium"
           >
             Submit
           </button>
@@ -71,11 +71,16 @@ export default function App() {
             {submissions.map((s) => (
               <div
                 key={s.id}
-                className="bg-white rounded-lg shadow px-4 py-3 flex items-center justify-between"
+                className="bg-white rounded-md shadow px-4 py-3 flex items-center justify-between"
               >
                 <div className="text-sm">
                   <p className="font-medium text-gray-900">{s.email}</p>
-                  <p className="text-gray-500">${s.amount.toFixed(2)}</p>
+                  <p className="text-gray-500">
+                    {s.amount.toLocaleString("en-IN", {
+                      style: "currency",
+                      currency: "INR",
+                    })}
+                  </p>
                 </div>
                 <StatusBadge status={s.status} attempt={s.attempt} />
               </div>
