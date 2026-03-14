@@ -18,14 +18,20 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-start justify-center pt-20 px-4">
-      <div className="w-full max-w-md space-y-6">
+      <div className="w-full max-w-md space-y-">
         <h1 className="text-2xl font-bold text-gray-900">
           Eventually Consistent Form
         </h1>
+        <a
+          href="https://github.com/dvr76/eventually-consistent-form"
+          className="text-teal-700 underline"
+        >
+          View Source on GitHub
+        </a>
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-md shadow p-6 space-y-4"
+          className="bg-white rounded-md shadow p-6 space-y-4 mt-6"
         >
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
